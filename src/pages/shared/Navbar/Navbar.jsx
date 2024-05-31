@@ -1,6 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/authProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const [cart] = useCart();
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   const navopctions = (
     <>
       <li>
@@ -9,8 +22,15 @@ const Navbar = () => {
       <li>
         <Link to='/menu'>Our Menu</Link>
       </li>
+
       <li>
-        <a href='/order'>Order Food</a>
+        <Link to='/order/:id'>Order Food</Link>
+      </li>
+      <li>
+        <Link to='/dashboard/cart'>
+          <FaShoppingCart />
+          <div className='badge badge-secondary'>+{cart.length}</div>
+        </Link>
       </li>
     </>
   );
@@ -49,11 +69,19 @@ const Navbar = () => {
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>{navopctions}</ul>
       </div>
-      <div className='navbar-end'>
-        <a href='/login' className='btn'>
-          Login
-        </a>
-      </div>
+      {user ? (
+        <div className='navbar-end'>
+          <button onClick={handleLogout} className='btn btn-error text-white'>
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div className='navbar-end'>
+          <a href='/login' className='btn'>
+            Login
+          </a>
+        </div>
+      )}
     </div>
   );
 };

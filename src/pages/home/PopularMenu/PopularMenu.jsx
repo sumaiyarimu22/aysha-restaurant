@@ -6,7 +6,7 @@ import MenuItem from "../../shared/menuItem/MenuItem/MenuItem";
 const PopularMenu = () => {
   const [menu] = useMenu();
   const popular = menu.filter((item) => item.category === "popular");
-  console.log(menu, popular);
+
   return (
     <section className='my-20'>
       <SectionsTitle heading={"From our menu"} subHeading={"Popular items"} />
