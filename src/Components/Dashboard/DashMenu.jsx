@@ -11,9 +11,11 @@ import { IoCart } from "react-icons/io5";
 import { MdOutlinePayment } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
 import useAdmin from "../../hooks/useAdmin";
+import useCart from "../../hooks/useCart";
 
 const DashMenu = () => {
   const [isAdmin] = useAdmin();
+  const [cart] = useCart();
 
   return (
     <div className='p-5'>
@@ -28,7 +30,9 @@ const DashMenu = () => {
           </li>
           <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
             <FaCalendarAlt />
-            <NavLink to='/dashboard/addItems'>add items</NavLink>
+            <NavLink to='/dashboard/addItems'>
+              add items ({cart.length})
+            </NavLink>
           </li>
           <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
             <MdOutlinePayment />
@@ -55,11 +59,11 @@ const DashMenu = () => {
           </li>
           <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
             <MdOutlinePayment />
-            <NavLink to='/dashboard/payment'>payment history</NavLink>
+            <NavLink to='/dashboard/paymentHistory'>payment history</NavLink>
           </li>
           <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
             <IoCart />
-            <NavLink to='/dashboard/cart'>my cart</NavLink>
+            <NavLink to='/dashboard/cart'>my cart ({cart.length})</NavLink>
           </li>
           <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
             <FaCalendarAlt />
