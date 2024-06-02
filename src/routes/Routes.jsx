@@ -17,6 +17,8 @@ import AdminRoute from "./AdminRoute";
 import UpdateItem from "../pages/UpdateItem/UpdateItem";
 import Payment from "../pages/payment/Payment";
 import PaymentHistory from "../pages/paymentHistory/PaymentHistory";
+import UserHome from "../pages/userHome/UserHome";
+import Contact from "../pages/contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "order/:category",
         element: <Order />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       },
       {
         path: "login",
@@ -70,12 +76,22 @@ export const router = createBrowserRouter([
         path: "payment",
         element: <Payment />,
       },
+
       {
         path: "paymentHistory",
         element: <PaymentHistory />,
       },
+      {
+        path: "userHome",
+        element: (
+          <PrivateRoute>
+            <UserHome />
+          </PrivateRoute>
+        ),
+      },
 
       // admin routes
+
       {
         path: "adminHome",
         element: (

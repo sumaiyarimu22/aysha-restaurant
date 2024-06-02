@@ -3,7 +3,6 @@ import {
   FaCalendarAlt,
   FaShoppingCart,
   FaPhoneAlt,
-  FaBook,
   FaUsers,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -18,80 +17,76 @@ const DashMenu = () => {
   const [cart] = useCart();
 
   return (
-    <div className='p-5'>
-      <h1 className='text-3xl'>AYSHA</h1>
-      <p className='text-[1.2rem] tracking-widest'>Resturent</p>
+    <div className='p-5 bg-white shadow-lg rounded-lg'>
+      <h1 className='text-3xl font-bold text-center mb-3'>AYSHA</h1>
+      <p className='text-lg text-center mb-5'>Restaurant</p>
 
       {isAdmin ? (
-        <ul className='space-y-5 py-5'>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaHome />
-            <NavLink to='/dashboard/adminHome'>Admin Home</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaCalendarAlt />
-            <NavLink to='/dashboard/addItems'>
-              add items ({cart.length})
-            </NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <MdOutlinePayment />
-            <NavLink to='/dashboard/manageItems'>manage items</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaBook />
-            <NavLink to='/dashboard/manageUpdate'>Update Item</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaUsers />
-            <NavLink to='/dashboard/allUsers'>all users</NavLink>
-          </li>
+        <ul className='space-y-2'>
+          <MenuItem icon={<FaHome />} to='/dashboard/adminHome'>
+            Admin Home
+          </MenuItem>
+          <MenuItem icon={<FaCalendarAlt />} to='/dashboard/addItems'>
+            Add Items
+          </MenuItem>
+          <MenuItem icon={<MdOutlinePayment />} to='/dashboard/manageItems'>
+            Manage Items
+          </MenuItem>
+          <MenuItem icon={<FaUsers />} to='/dashboard/allUsers'>
+            All Users
+          </MenuItem>
         </ul>
       ) : (
-        <ul className='space-y-5 py-5'>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaHome />
-            <NavLink to='/dashboard/userHome'>User Home</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaCalendarAlt />
-            <NavLink to='/dashboard/reservation'>reservation</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <MdOutlinePayment />
-            <NavLink to='/dashboard/paymentHistory'>payment history</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <IoCart />
-            <NavLink to='/dashboard/cart'>my cart ({cart.length})</NavLink>
-          </li>
-          <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-            <FaCalendarAlt />
-            <NavLink to='/dashboard/bookings'>my booking</NavLink>
-          </li>
+        <ul className='space-y-2'>
+          <MenuItem icon={<FaHome />} to='/dashboard/userHome'>
+            User Home
+          </MenuItem>
+          <MenuItem icon={<FaCalendarAlt />} to='/dashboard/reservation'>
+            Reservation
+          </MenuItem>
+          <MenuItem icon={<MdOutlinePayment />} to='/dashboard/paymentHistory'>
+            Payment History
+          </MenuItem>
+          <MenuItem icon={<IoCart />} to='/dashboard/cart'>
+            My Cart ({cart.length})
+          </MenuItem>
+          <MenuItem icon={<FaCalendarAlt />} to='/dashboard/bookings'>
+            My Bookings
+          </MenuItem>
         </ul>
       )}
-      <hr />
-      <ul className='space-y-5 py-5'>
-        <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-          <FaHome />
-          <NavLink to='/'>Home</NavLink>
-        </li>
-        <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-          <FaShoppingCart />
-          <NavLink to=''>Shop</NavLink>
-        </li>
-        <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-          <IoIosMenu />
-          <NavLink to=''>Menu</NavLink>
-        </li>
-        <li className='flex gap-3 hover:text-white transition-all duration-300 items-center'>
-          <FaPhoneAlt />
-          <NavLink to=''>contact</NavLink>
-        </li>
+
+      <hr className='my-5' />
+
+      <ul className='space-y-2'>
+        <MenuItem icon={<FaHome />} to='/'>
+          Home
+        </MenuItem>
+        <MenuItem icon={<FaShoppingCart />} to='/order/:id'>
+          Shop
+        </MenuItem>
+        <MenuItem icon={<IoIosMenu />} to='/menu'>
+          Menu
+        </MenuItem>
+        <MenuItem icon={<FaPhoneAlt />} to='/contact'>
+          Contact
+        </MenuItem>
       </ul>
     </div>
   );
 };
+
+const MenuItem = ({ icon, to, children }) => (
+  <li className='flex items-center gap-3 hover:text-white transition-all duration-300'>
+    {icon}
+    <NavLink
+      to={to}
+      className='nav-link text-gray-700 hover:text-gray-900'
+      activeClassName='text-yellow-500'
+    >
+      {children}
+    </NavLink>
+  </li>
+);
 
 export default DashMenu;
